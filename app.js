@@ -8,6 +8,7 @@ var app= express();
 app.set('views',path.resolve(__dirname, 'views'));
 app.set('view engine','ejs');
 var entries=[];
+var daniela=true;
 app.locals.entries=entries;
 
 app.use(logger('dev'));
