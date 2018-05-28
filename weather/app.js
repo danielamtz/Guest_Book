@@ -19,12 +19,12 @@ res.render("index");
 
 app.get(/^\/(\d{5})$/,function(req,res,next) {
     var zipcode= req.params[0];
-    var location= zupdb.zipcode(zipcode);
+    var location= zipdb.zipcode(zipcode);
     if(!location.zipcode){
         next();
         return;
     }
-    var latitude= locatiion.latitude;
+    var latitude= location.latitude;
     var longitude= location.longitude;
 
     weather.forecast(latitude,longitude,function(err,data){
@@ -34,7 +34,7 @@ app.get(/^\/(\d{5})$/,function(req,res,next) {
         }
         res.json({
             zipcode: zipcode,
-            temperature: data.currectly.temperature
+            temperature: data.currently.temperature
         });
 
 
