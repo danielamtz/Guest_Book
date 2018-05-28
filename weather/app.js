@@ -1,5 +1,5 @@
 var path=require("path");
-var express= require=("express");
+var express= require("express");
 var zipdb= require("zippity-do-dah");
 var Forecastio=require("forecastio");
 
@@ -21,7 +21,7 @@ app.get(/^\/(\d{5})$/,function(req,res,next) {
     var zipcode= req.params[0];
     var location= zupdb.zipcode(zipcode);
     if(!location.zipcode){
-        nextr();
+        next();
         return;
     }
     var latitude= locatiion.latitude;
@@ -30,14 +30,19 @@ app.get(/^\/(\d{5})$/,function(req,res,next) {
     weather.forecast(latitude,longitude,function(err,data){
         if(err){
             next();
-            return();
+            return;
         }
+        res.json({
+            zipcode: zipcode,
+            temperature: data.currectly.temperature
+        });
 
 
-    })
+    });
 
+});
 
-}
-
-
-)
+app.use(function(req,res){
+    res.status(404).render("404");
+});
+app.listen(3000);
