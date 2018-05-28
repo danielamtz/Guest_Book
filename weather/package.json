@@ -9,6 +9,9 @@
   "author": "DMM",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "forecastio": "^1.0.2",
+    "zippity-do-dah": "0.0.3"
   }
 }
