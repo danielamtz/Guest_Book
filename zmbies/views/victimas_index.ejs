@@ -3,6 +3,35 @@
     escribe en el libro de visitas
 </a>
 <br/>
+         
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+            <h4>Eduardo Camacho</h4>
+        <div class="text-muted  pull-left">
+                <h4>Las flores #320</h4>
+                <h4>@edtl22</h4>
+        </div>
+    </div>
+
+    <div class="panel-heading">
+        <h4>Sandra Villalobos</h4>
+    <div class="text-muted  pull-left">
+            <h4>Los pinos #896</h4>
+            <h4>@savilla</h4>
+    </div>
+</div>
+
+</div>
+<br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <br/>
 <% if(entries.length){ %>
     <% entries.forEach((entry)=> { %>
@@ -15,8 +44,16 @@
                         <%= entry.created %>
                 </div>
                 <%= entry.title%>
+              
 
             </div>
+
+        <div class="panel-body">
+            <%= entry.Direccion%>
+    </div>
+    <div class="panel-body">
+        <%= entry.instagram%>
+</div>
             <div class="panel-body">
                     <%=entry.body %>
             </div>
