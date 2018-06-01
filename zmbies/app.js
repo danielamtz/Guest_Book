@@ -14,30 +14,40 @@ app.set('view engine','ejs');
 app.use(express.static(path.resolve(__dirname,"public")));
 app.get("/",function(req,res){
 
-    res.render("header");
+    res.render("victimas_index");
     
     });
 //arreglo para entradas
 var entries=[];
+var ips_blanca=['192.168.92.1','192.0.0.1','::1'];
+var aux;
+
 app.locals.entries=entries;
 
-var IP_MALVADA="192.168.0.0";
+var IP_MALVADA="::1";
 
-app.use((request,response,next)=>{
-    if(request.ip ===IP_MALVADA){
-        response.status(401).send("Intento de acceso no autorizado");
-    }else{
+
+    app.use("/new-entry",(request,response,next,)=>{
+        for (var i = 0; i < ips_blanca.length; i++) {
+
+        if(request.ip ===ips_blanca[i]){
+           aux=ips_blanca[i];
+            
+        }
+    }
+    if(request.ip===aux){
         next();
     }
-    
-    
-});
+    else{
+        response.status(401).send("No estas en el arreglo de ips");
+   
+    }
+    });
+ 
 
-
-app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get("/", (request,response)=> response.render('header'));
+app.get("/", (request,response)=> response.render('victimas_index'));
 app.get("/armas", (request,response)=> response.render('armas'));
 app.get("/clases", (request,response)=> response.render('clases'));
 app.get("/new-entry",(request,response)=>response.render("new-entry"));

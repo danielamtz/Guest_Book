@@ -11,5 +11,13 @@ body{
     background-color:rgb(0, 0, 0)
   }
  #imagen_principal{
-     background-image: url(img/4.jpg);
+    margin-top: 70px;
+ }
+ .zombie{
+    font-size: 20px; 
+    color: aliceblue;
+ }
+ .tiZombie{
+    font-size: 30px; 
+    color:rgb(253, 235, 235);
  }
