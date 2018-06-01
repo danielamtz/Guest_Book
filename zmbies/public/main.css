@@ -1,3 +1,15 @@
-#logo{
-    width: 20px;
+body{
+
+  background-image: url(https://images.unsplash.com/photo-1496517741878-4c0af85f0991?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5a8da555b85ba2e6af7212c9427c0e94&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb);
+  background-size: cover;
 }
+.navbar{
+    max-height:100px; 
+    background-color:rgb(0, 0, 0)
+  }
+  #footer{
+    background-color:rgb(0, 0, 0)
+  }
+ #imagen_principal{
+     background-image: url(img/4.jpg);
+ }

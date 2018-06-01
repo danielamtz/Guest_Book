@@ -9,9 +9,29 @@ var app= express();
 
 app.set('views',path.resolve(__dirname, 'views'));
 app.set('view engine','ejs');
+
+
+app.use(express.static(path.resolve(__dirname,"public")));
+app.get("/",function(req,res){
+
+    res.render("header");
+    
+    });
 //arreglo para entradas
 var entries=[];
 app.locals.entries=entries;
+
+var IP_MALVADA="192.168.0.0";
+
+app.use((request,response,next)=>{
+    if(request.ip ===IP_MALVADA){
+        response.status(401).send("Intento de acceso no autorizado");
+    }else{
+        next();
+    }
+    
+    
+});
 
 
 app.use(logger('dev'));
