@@ -20,7 +20,7 @@ zombieSchema.pre("save",(done)=>{
     if(!zombie.isModified("password")){
         return done();
     }
-    bcrypt.generateSalt(SALT_FACTOR,(err,salt)=>{
+    bcrypt.genSalt(SALT_FACTOR,(err,salt)=>{
         if(err){
             return done(err);
         }
@@ -41,7 +41,7 @@ zombieSchema.methods.checkPassword=(guess,done)=>{
     });
 }
 
-zombieSchema.methods.name=()=>{
+zombieSchema.methods.name=function(){
     return this.displayName||this.username;
 }
 
