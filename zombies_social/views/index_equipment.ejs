@@ -1,0 +1,25 @@
+<%include _header%>
+<a href="/registro_equipo" class="btn btn-primary pull-right">
+    escribe en el libro de visitas
+</a>
+<h1>Bienvenid@ al equipamiento</h1>
+<% equipment.forEach((equipo) => {%>
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="/equipment/<%= equipo.description %>">
+        <%= equipo.name() %>
+        </a>
+
+    </div>
+    <%if (equipo.defense){%>
+    <div class="panel-body"><%= equipo.defense %></div>
+    <div class="panel-body"><%= equipo.category %></div>
+    <div class="panel-body"><%= equipo.weight %></div>
+<%}%>
+
+    </div>
+    
+
+<% }) %>
+
+<%include _footer%>

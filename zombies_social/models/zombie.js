@@ -11,6 +11,7 @@ var zombieSchema=mongoose.Schema({
     bio: String
 });
 
+
 var donothing=()=>{
 
 }
@@ -44,6 +45,7 @@ zombieSchema.methods.checkPassword=(guess,done)=>{
 zombieSchema.methods.name=function(){
     return this.displayName||this.username;
 }
+
 
 var Zombie=mongoose.model("Zombie",zombieSchema);
 module.exports=Zombie;
