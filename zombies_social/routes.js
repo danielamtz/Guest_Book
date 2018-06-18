@@ -22,4 +22,41 @@ router.get("/",(req,res,next)=>{
             res.render("index",{zombies:zombies});
         });
 });
+router.get("/signup",(req,res,next)=>{
+    res.render("signup")
+});
+
+router.get("/zombies/:username",(req,res,next)=>{
+Zombie.findOne({username: req.params.username}, (err,zombie)=>{
+    if(err){
+        return next(err);
+    }
+    if(!zombie){
+        return next(400);
+    }
+    res.render("profile",{zombie: zombie});
+});
+});
+
+router.post("/signup", (req,res,next)=>{
+    var username= req.body.username;
+    var password= req.body.password;
+
+
+Zombie.findOne({username: username},(err,zombie)=>{
+    if(err){
+        return next(err);
+    }
+    if(zombie){
+        req.flash("error","El nombre de usuario ya lo ha tomado otro zombie");
+        return res.redirect("/signup");
+    }
+    var newZombie= new Zombie({
+        username:username,
+        password:password
+    });
+    newZombie.save(next);
+    return res.redirect("/");
+});
+});
 module.exports=router;
