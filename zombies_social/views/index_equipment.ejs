@@ -1,20 +1,23 @@
 <%include _header%>
 <a href="/registro_equipo" class="btn btn-primary pull-right">
-    escribe en el libro de visitas
+    Registra un nuevo equipo
 </a>
 <h1>Bienvenid@ al equipamiento</h1>
 <% equipment.forEach((equipo) => {%>
     <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="/equipment/<%= equipo.description %>">
-        <%= equipo.name() %>
-        </a>
+        <%if(equipo.category){%>
 
+    <h2>Categoria: <%=equipo.category%></h2>
+    <%}else{%>
+    <h2>sin categoria</h2>
+    <% } %>
     </div>
+    
     <%if (equipo.defense){%>
-    <div class="panel-body"><%= equipo.defense %></div>
-    <div class="panel-body"><%= equipo.category %></div>
-    <div class="panel-body"><%= equipo.weight %></div>
+    <div class="panel-body"><h3>Descripción: <%= equipo.description %></h3></div>
+    <div class="panel-body"><h3> Defensa: <%= equipo.defense %></h3></div>
+    <div class="panel-body"><h3>Peso: <%= equipo.weight %></h3></div>
 <%}%>
 
     </div>
