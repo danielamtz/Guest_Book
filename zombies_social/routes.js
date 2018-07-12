@@ -37,6 +37,18 @@ router.get("/index_equipment",(req,res,next)=>{
 router.get("/signup",(req,res,next)=>{
     res.render("signup")
 });
+router.get("/login",(req,res)=>{
+    res.render("login");
+});
+router.post("/login",passport.authenticate("login",{
+    successRedirect:"/",
+    failureRedirect:"/login",
+    failureFlash:true
+}));
+router.get("/logout",(req,res)=>{
+    req.logout();
+    res.redirect("/");
+});
 
 router.get("/index_equipment",(req,res,next)=>{
     res.render("index_equipment")
@@ -77,8 +89,31 @@ Zombie.findOne({username: username},(err,zombie)=>{
     return res.redirect("/");
 });
 });
+router.get("/edit",ensureAuthenticated,(req,res)=>{
+    res.render("edit");
+});
+router.post("/edit",ensureAuthenticated,(req,res,next)=>{
+    req.zombie.displayName = req.body.displayName;
+    req.zombie.bio=req.body.bio;
+    req.zombie.save((err)=>{
+        if(err){
+            next(err);
+            return;
+        }
+        req.flash("info","perfil actualizado");
+        res.redirect("/edit");
+    });
+});
+function ensureAuthenticated(req,res,next){
+    if(req.isAuthenticated()){
+        next();
+    }
 
-
+    else{
+        req.flash("info","Necesitas iniciar sesión para poder ver esta seccion");
+        res.redirect("/login");
+    }
+}
 router.post("/registro_equipo", (req,res,next)=>{
     var description= req.body.description;
     var defense= req.body.defense;

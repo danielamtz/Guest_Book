@@ -8,15 +8,21 @@ var zombieSchema=mongoose.Schema({
     password:{type: String, required:true},
     createdAt:{type: Date, default: Date.now},
     displayName:{type: String},
-    bio: String
+    bio: String,
+    rol:{type: String, required:true}
 });
 
+var equipmentSchema = mongoose.Schema({
+    description: {type: String, required: true},
+    defense: {type: Number, required: true},
+    category: {type: String},
+    weight: Number
+});
 
 var donothing=()=>{
-
 }
 //Encripta antes de entrar a la base
-zombieSchema.pre("save",function(done){
+zombieSchema.pre("save", function(done){
     var zombie= this;
     if(!zombie.isModified("password")){
         return done();
@@ -36,7 +42,7 @@ zombieSchema.pre("save",function(done){
 });
 
 
-zombieSchema.methods.checkPassword=function(guess,done){
+zombieSchema.methods.checkPassword= function(guess,done){
     bcrypt.compare(guess,this.password,function(err,isMatch){
         done(err,isMatch);
     });
@@ -44,6 +50,9 @@ zombieSchema.methods.checkPassword=function(guess,done){
 
 zombieSchema.methods.name=function(){
     return this.displayName||this.username;
+}
+zombieSchema.methods.roles=function(){
+    return this.rol||this.rol;
 }
 
 
